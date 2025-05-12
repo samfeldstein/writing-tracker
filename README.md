@@ -1,8 +1,6 @@
 # 🖋️ The Simplest Writing Tracker
 
-A simple text-based application to track my writing.
-
-The application comprises a `log.csv` file, two Python scripts, and a shell script.
+A simple text-based application to track my writing. It comprises a `log.csv` file, two Python scripts, and a shell script.
 
 The first Python script is called `entry.py`. It prompts you to enter the number of words you wrote. It logs that number in `log.csv` along with the current date.
 
