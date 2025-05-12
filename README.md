@@ -1,4 +1,4 @@
-🖋️ # The Simplest Writing Tracker
+# 🖋️ The Simplest Writing Tracker
 
 A simple text-based application to track my writing.
 
