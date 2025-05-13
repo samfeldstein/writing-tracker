@@ -12,8 +12,14 @@ start_time = log_start_time()
 start_words = log_start_words()
 end_time = log_end_time()
 end_words = log_end_words()
+time_today = end_time - start_time
+
+# Format times
+start_str = start_time.strftime("%H:%M")
+end_str = end_time.strftime("%H:%M")
+duration_str = str(time_today)[:-3] # removes seconds
 
 # Open the CSV file in append mode and add the new entry
 with open("log.csv", "a", newline="") as file:
     writer = csv.writer(file)
-    writer.writerow([today, project, start_time, start_words, end_time, end_words])
+    writer.writerow([today, project, start_str, start_words, end_str, end_words, duration_str])

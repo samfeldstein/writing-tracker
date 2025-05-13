@@ -2,9 +2,8 @@ from datetime import datetime
 
 def log_start_time():
     while True:
+        s = input("Start time (HHMM): ")
         try:
-            return datetime.strptime(
-                input("Start time (HHMM): "), "%H%M"
-            ).time().isoformat(timespec="minutes")
+            return datetime.strptime(s, "%H%M")
         except ValueError:
-            print("Invalid format. Please use HHMM (e.g. 0930).")
+            print("Invalid. Use HHMM, e.g. 0930.")
