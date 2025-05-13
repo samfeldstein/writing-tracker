@@ -23,13 +23,13 @@ def calc():
     current_year = date.today().year
     # Calculate words written this year
     words_this_year = sum(
-        int(row[2])
+        int(row[-1])
         for row in data
         if row[0].startswith(str(current_year))
     )
 
     # Calculate words written all time
-    words_all_time = sum(int(row[2]) for row in data)
+    words_all_time = sum(int(row[-1]) for row in data)
 
     # Calculate average words per logged day
     avg_day = round(words_all_time / len({row[0].strip() for row in data})) if data else 0

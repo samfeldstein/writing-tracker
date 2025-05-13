@@ -3,6 +3,8 @@ from datetime import date
 
 def add_words():
     project = input("Project: ")
+    start = input("Start time (HH:MM): ")
+    end   = input("End   time (HH:MM): ")
     words = input("Words: ")
 
     # Convert the input to an integer
@@ -14,4 +16,4 @@ def add_words():
     # Open the CSV file in append mode and add the new entry
     with open("log.csv", "a", newline="") as file:
         writer = csv.writer(file)
-        writer.writerow([today, project, words])
+        writer.writerow([today, project, start, end, words])
