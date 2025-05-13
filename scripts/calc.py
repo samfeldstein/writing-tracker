@@ -1,43 +1,39 @@
 import csv
 from datetime import date
 
-def calc():
-    # Open the CSV file and read the data
-    with open("log.csv", "r") as file:
-        reader = csv.reader(file)
-        rows = list(reader)
 
-    # Skip the header row
-    data = rows[1:]
+def _read_rows():
+    with open("log.csv", newline="") as f:
+        rows = list(csv.reader(f))
+    # Skip the header row (first line) and any blank lines
+    return [r for r in rows[1:] if r]
 
-    # Calculate words written today
+def calc_words_today():
     today = date.today().isoformat()
-    # Sum all entries for today
-    words_today = 0
-    for row in data:
-        # strip whitespace and compare to today’s date
-        if row[0].strip() == today:
-            words_today += int(row[-1])
-
-    # Calculate words written this year
-    current_year = date.today().year
-    # Calculate words written this year
-    words_this_year = sum(
-        int(row[-1])
-        for row in data
-        if row[0].startswith(str(current_year))
+    rows = _read_rows()
+    return sum(
+        int(r[-1])
+        for r in rows
+        if r[0] == today
     )
 
-    # Calculate words written all time
-    words_all_time = sum(int(row[-1]) for row in data)
+def calc_words_all_time():
+    rows = _read_rows()
+    return sum(int(r[-1]) for r in rows)
 
-    # Calculate average words per logged day
-    avg_day = round(words_all_time / len({row[0].strip() for row in data})) if data else 0
 
-    # Print results
-    print("-" * 30)
-    print(f"{'Day:':<10}{words_today:>6}")
-    print(f"{'Avg/day:':<10}{avg_day:>6}")
-    print(f"{'Year:':<10}{words_this_year:>6}")
-    print(f"{'All:':<10}{words_all_time:>6}")
-    print("-" * 30)
+def calc_words_this_year():
+    year = str(date.today().year)
+    rows = _read_rows()
+    return sum(
+        int(r[-1])
+        for r in rows
+        if r[0].startswith(year)
+    )
+
+
+def calc_avg_words():
+    rows = _read_rows()
+    unique_days = {r[0] for r in rows}
+    total = calc_words_all_time()
+    return round(total / len(unique_days)) if unique_days else 0
