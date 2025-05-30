@@ -35,6 +35,9 @@ words_this_year = calc_words_this_year()
 words_all_time = calc_words_all_time()
 avg_words = calc_avg_words()
 
+# Add words from old timesheets to all time total. Adding separate here so it doesn't fuck up avg
+words_all_time = words_all_time + 79562
+
 # Print results
 spacing = 20
 print("-" * 30)
